@@ -34,6 +34,12 @@ class AnnotatedSecureServiceSpec extends GebReportingSpec {
         given:
         def username = "wsuser"
         def password = "secret"
+        //TimeZone.setDefault(TimeZone.getTimeZone('UTC'))
+        //def nowAsStr = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ'")
+                                         //'2013-01-18T16:19:17.950Z'
+        //println nowAsStr
+        //'wsu:Created'('2015-03-10T18:30:15.950Z')
+        //'wsu:Expires'('2015-03-10T19:40:00.950Z')
 
         when:
         SOAPResponse response = client.send {
@@ -45,7 +51,7 @@ class AnnotatedSecureServiceSpec extends GebReportingSpec {
                         'wsse:Username'(username)
                         'wsse:Password'('Type':'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText',password)
                         'wsse:Nonce'('EncodingType':'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary',new String(password.bytes.encodeBase64().toString()))
-                        'wsu:Created'('2013-01-18T16:19:17.950Z')
+                        'wsu:Created'('2015-03-10T19:23:00Z')
                     }
                 }
             }
