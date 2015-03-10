@@ -7,12 +7,14 @@ import javax.xml.bind.annotation.XmlElement
 /**
  */
 @XmlAccessorType(XmlAccessType.NONE)
-class SimpleException extends Exception {
+class SimpleException {
 
     @XmlElement
     String message
 
+    SimpleException() { }
+
     SimpleException(String message) {
-        super(message)
+        this.message = message
     }
 }

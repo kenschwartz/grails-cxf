@@ -117,9 +117,9 @@ grails.project.dependency.resolution = {
         //remove this before committing.  Only used to release...not test.
         // This still an issue?!?
         // http://grails.1312388.n4.nabble.com/Geb-and-Release-plugin-httpclient-conflicts-td4295238.html
-        build(':release:3.0.1', ':rest-client-builder:2.0.1') {
+       // build(':release:3.0.1', ':rest-client-builder:2.0.1') {
 //            export = false
-        }
+        //}
 
         runtime(":hibernate4:4.3.6.1") {
             export = false
