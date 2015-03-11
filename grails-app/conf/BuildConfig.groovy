@@ -10,7 +10,7 @@ grails.project.repos.kmsRepo.password = ''
 
 grails.project.dependency.resolution = {
 
-    String cxfVersion = '3.0.2'
+    String cxfVersion = '3.0.4'
     String jaxbVersion = '2.2.7'
     String springVersion = '4.0.8.RELEASE'
 
