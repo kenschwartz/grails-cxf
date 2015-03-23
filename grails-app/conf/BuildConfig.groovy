@@ -26,38 +26,35 @@ grails.project.dependency.resolution = {
     dependencies {
         compile('commons-cli:commons-cli:1.2')
 
+        compile("org.apache.cxf:cxf-core:${cxfVersion}") {
+            excludes 'validation-api', 'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14',
+                     'spring-aop', 'spring-beans', 'spring-context',
+                     'jaxb-core', 'jaxb-xjc', 'jaxb-api', 'jaxb-impl'
+        }
         compile("org.apache.cxf:cxf-tools-wsdlto-core:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
+            excludes 'cxf-core',  'spring-aop', 'spring-beans', 'spring-context',
+                     'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
+                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'slf4j'
         }
 
         compile("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
         }
 
         compile("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
         }
 
         compile("org.apache.cxf:cxf-rt-frontend-jaxws:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
         }
 
         compile("org.apache.cxf:cxf-rt-frontend-jaxrs:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
-        }
-
-        compile("com.sun.xml.bind:jaxb-impl:${jaxbVersion}"){
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
-        }
-
-        compile("com.sun.xml.bind:jaxb-xjc:${jaxbVersion}"){
-            excludes 'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
         }
 
         compile("org.springframework:spring-expression:${springVersion}"){
@@ -117,9 +114,9 @@ grails.project.dependency.resolution = {
         //remove this before committing.  Only used to release...not test.
         // This still an issue?!?
         // http://grails.1312388.n4.nabble.com/Geb-and-Release-plugin-httpclient-conflicts-td4295238.html
-       // build(':release:3.0.1', ':rest-client-builder:2.0.1') {
+        build(':release:3.0.1', ':rest-client-builder:2.0.1') {
 //            export = false
-        //}
+        }
 
         runtime(":hibernate4:4.3.6.1") {
             export = false
