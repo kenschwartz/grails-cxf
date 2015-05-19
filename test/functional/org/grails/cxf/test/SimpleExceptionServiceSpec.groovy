@@ -40,8 +40,7 @@ class SimpleExceptionServiceSpec extends GebReportingSpec {
         200 == response.httpResponse.statusCode
         SOAPVersion.V1_1 == response.soapVersion
         methodResponse.size() > 0
-        // no more stackTrace b/c SimpleException no longer extends Exception (b/c of JAXB requirement for no-arg constructor on StackTraceElement).
-        //methodResponse.stackTrace.size() > 0
+        methodResponse.stackTrace.size() > 0
 
     }
 }
