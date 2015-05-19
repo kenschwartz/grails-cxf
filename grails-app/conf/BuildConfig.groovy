@@ -2,87 +2,127 @@ grails.servlet.version = "3.0" // Change depending on target container complianc
 grails.project.work.dir = 'target'
 grails.project.source.level = 1.6
 
-grails.project.repos.default = "kmsRepo"
-grails.project.repos.kmsRepo.url = "https://wiki.wikigood.com/artifactory/plugins-snapshot-local"
-grails.project.repos.kmsRepo.type = "maven"
-grails.project.repos.kmsRepo.username = "admin"
-grails.project.repos.kmsRepo.password = ''
-
+grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
 
     String cxfVersion = '3.0.4'
-    String jaxbVersion = '2.2.7'
-    String springVersion = '4.0.8.RELEASE'
+    String jaxbVersion = '2.2.11'
+    String springVersion = '4.0.9.RELEASE'
 
     inherits 'global'
     log 'warn'
+    checksums true // Whether to verify checksums on resolve
+    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
-        grailsCentral()
+        inherits true // Whether to inherit repository definitions from plugins
+
         mavenLocal()
         mavenCentral()
+        grailsPlugins()
+        grailsHome()
+        grailsCentral()
+//        mavenRepo "http://repo.grails.org/grails/repo/"
+//        mavenRepo "http://repo1.maven.org/maven2/"
     }
 
     dependencies {
         compile('commons-cli:commons-cli:1.2')
 
         compile("org.apache.cxf:cxf-core:${cxfVersion}") {
-            excludes 'validation-api', 'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14',
-                     'spring-aop', 'spring-beans', 'spring-context',
-                     'jaxb-core', 'jaxb-xjc', 'jaxb-api', 'jaxb-impl'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
+
         compile("org.apache.cxf:cxf-tools-wsdlto-core:${cxfVersion}") {
-            excludes 'cxf-core',  'spring-aop', 'spring-beans', 'spring-context',
-                     'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
-                     'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'slf4j'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
 
         compile("org.apache.cxf:cxf-tools-wsdlto-frontend-jaxws:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
 
         compile("org.apache.cxf:cxf-tools-wsdlto-databinding-jaxb:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
 
         compile("org.apache.cxf:cxf-rt-frontend-jaxws:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
 
         compile("org.apache.cxf:cxf-rt-frontend-jaxrs:${cxfVersion}") {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc', 'jaxb-api', 'jaxb-core',
-                    'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'spring-beans', 'spring-context', 'slf4j'
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-core:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-frontend-jaxws:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-frontend-jaxrs:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-frontend-simple:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-wsdl:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-bindings-soap:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
+        }
+        compile("org.apache.cxf:cxf-rt-databinding-jaxb:${cxfVersion}") {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis', 'jaxb-impl', 'jaxb-xjc'
         }
 
-        compile("org.springframework:spring-expression:${springVersion}"){
-            excludes 'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'spring-aop', 'slf4j'
-        }
+        compile("com.sun.xml.bind:jaxb-impl:${jaxbVersion}")
 
-        compile("org.springframework:spring-aop:${springVersion}"){
-            excludes 'junit', 'log4j', 'slf4j-api', 'slf4j-jdk14', 'slf4j'
-        }
+        compile("com.sun.xml.bind:jaxb-xjc:${jaxbVersion}")
+
+        compile("org.springframework:spring-expression:${springVersion}")
+
+        compile("org.springframework:spring-aop:${springVersion}")
 
         /* Some Testing Help **************************************************/
-        test('org.apache.ws.security:wss4j:1.6.7') {
-            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis',
-                    'junit', 'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14',
-                    'spring-aop', 'spring-beans', 'spring-context'
+//        test('org.apache.ws.security:wss4j:1.6.18') {
+        /*
+        <module>parent</module>
+        <module>bindings</module>
+        <module>policy</module>
+        <module>ws-security-common</module>
+        <module>ws-security-dom</module>
+        <module>ws-security-stax</module>
+        <module>integration</module>
+        <module>ws-security-policy-stax</module>
+        */
+        test('org.apache.wss4j:wss4j-ws-security-stax:2.0.3') {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis','junit', 'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14'
             export = false
         }
 
-        test("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}"){
+        test('org.apache.wss4j:wss4j-ws-security-dom:2.0.3') {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis','junit', 'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14'
+            export = false
+        }
+
+        test('org.apache.wss4j:wss4j-bindings:2.0.3') {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis','junit', 'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14'
+            export = false
+        }
+
+        test('org.apache.wss4j:wss4j-policy:2.0.3') {
+            excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis','junit', 'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14'
+            export = false
+        }
+
+        test("org.apache.cxf:cxf-rt-ws-security:${cxfVersion}") {
             excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis',
                     'ehcache', 'easymock', 'ehcache-core',
-                    'log4j', 'slf4j', 'slf4j-log4j12','slf4j-api', 'slf4j-jdk14',
-                    'junit', 'spring-aop', 'spring-beans', 'spring-context'
+                    'log4j', 'slf4j', 'slf4j-log4j12', 'slf4j-api', 'slf4j-jdk14'
             export = false
         }
 
 
-        test("org.gebish:geb-spock:0.9.2") {
+        test("org.gebish:geb-spock:0.10.0") {
             export = false
         }
 
@@ -108,21 +148,25 @@ grails.project.dependency.resolution = {
             excludes 'xmlbeans', 'spring-web', 'spring-core', 'xml-apis'
             export = false
         }
+
+        test("org.grails:grails-datastore-test-support:1.0.2-grails-2.4") {
+            export = false
+        }
     }
 
     plugins {
         //remove this before committing.  Only used to release...not test.
         // This still an issue?!?
         // http://grails.1312388.n4.nabble.com/Geb-and-Release-plugin-httpclient-conflicts-td4295238.html
-        build(':release:3.0.1', ':rest-client-builder:2.0.1') {
+//        build(':release:3.0.1', ':rest-client-builder:2.0.1') {
 //            export = false
-        }
+//        }
 
-        runtime(":hibernate4:4.3.6.1") {
+        runtime(":hibernate:3.6.10.16") {
             export = false
         }
 
-        runtime(":tomcat:7.0.55") {
+        runtime(":tomcat:7.0.53") {
             export = false
         }
 
@@ -130,7 +174,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        test(":geb:0.9.2") {
+        test(":geb:0.10.0") {
             export = false
         }
 
